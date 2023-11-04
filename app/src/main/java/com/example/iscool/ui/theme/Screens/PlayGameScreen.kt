@@ -27,8 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.iscool.R
 
-
-
 @Composable
 fun PlayGameScreen(
 ){
@@ -57,22 +55,36 @@ fun PictureWithButton(modifier: Modifier = Modifier) {
         else -> R.drawable.notcool_07
     }
 
-    val handler = Handler(Looper.getMainLooper())
+    // Function to generate random numbers so that same number never comes twice in a row
+    // (i.e. same image is not shown twice in a row)
+    fun generateRandomNumber(range: IntRange, previousNumber: Int?): Int {
+        var newNumber: Int
+        do {
+            newNumber = range.random()
+        } while (newNumber == previousNumber)
+        return newNumber
+    }
 
+    // Loop to show images in gradually reducing interval
+    val handler = Handler(Looper.getMainLooper())
     DisposableEffect(Unit) {
         val runnable = object : Runnable {
             var delayMillis = 3000L // Initial interval is 3 seconds
+            var previousNum: Int? = null
+
             override fun run() {
-                result = (1..13).random()
-                // Reduce the interval gradually (e.g., by 200 milliseconds)
+                result = generateRandomNumber(1..13, previousNum)
+                previousNum = result
+
+                // Reduce the interval gradually by 100 milliseconds
                 delayMillis -= 100
-                delayMillis = delayMillis.coerceAtLeast(400) // Limit to a minimum interval of 400 milliseconds
+                // Limit to a minimum interval of 400 milliseconds
+                delayMillis = delayMillis.coerceAtLeast(400)
 
                 handler.postDelayed(this, delayMillis)
             }
         }
         handler.postDelayed(runnable, 3000) // Start with an initial interval of 3 seconds
-
         onDispose {
             handler.removeCallbacksAndMessages(null)
         }
