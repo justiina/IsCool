@@ -25,14 +25,48 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.iscool.R
+import androidx.compose.foundation.layout.Row
+
 
 @Composable
 fun PlayGameScreen(
+    navController: NavHostController
 ){
-    PictureWithButton(modifier= Modifier
-        .fillMaxSize()
-        .wrapContentSize(Alignment.Center))
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp), // Add spacing between buttons
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Button(
+                onClick = { navController.navigate("StartGameRoute") },
+                modifier = Modifier
+                    .size(100.dp)
+            ) {
+                Text(stringResource(R.string.cancelButtonText))
+            }
+            Button(
+                onClick = { navController.navigate("EndGameRoute") },
+                modifier = Modifier
+                    .size(100.dp)
+            ) {
+                Text(stringResource(R.string.quitGameButtonText))
+            }
+        }
+        PictureWithButton(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+        )
+    }
 }
 @Composable
 fun PictureWithButton(modifier: Modifier = Modifier) {

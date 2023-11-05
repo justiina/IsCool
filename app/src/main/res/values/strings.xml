@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">IsCool</string>
     <string name="cool">isCool</string>
+    <string name="playButtonText">Play!</string>
+    <string name="cancelButtonText">Cancel</string>
+    <string name="quitGameButtonText">Quit the game</string>
+    <string name="okButtonText">OK</string>
 </resources>
