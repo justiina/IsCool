@@ -28,8 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.iscool.R
 import androidx.compose.foundation.layout.Row
-
-
+import androidx.compose.ui.unit.sp
 @Composable
 fun PlayGameScreen(
     navController: NavHostController
@@ -62,6 +61,7 @@ fun PlayGameScreen(
             }
         }
         PictureWithButton(
+            navController = navController,
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
@@ -69,9 +69,15 @@ fun PlayGameScreen(
     }
 }
 @Composable
-fun PictureWithButton(modifier: Modifier = Modifier) {
+fun PictureWithButton(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     var result by remember {
         mutableStateOf(5)
+    }
+    var points by remember {
+        mutableStateOf(0)
     }
     val imageResource = when(result) {
         1 -> R.drawable.iscool_01
@@ -107,6 +113,7 @@ fun PictureWithButton(modifier: Modifier = Modifier) {
             var previousNum: Int? = null
 
             override fun run() {
+
                 result = generateRandomNumber(1..13, previousNum)
                 previousNum = result
 
@@ -116,6 +123,7 @@ fun PictureWithButton(modifier: Modifier = Modifier) {
                 delayMillis = delayMillis.coerceAtLeast(400)
 
                 handler.postDelayed(this, delayMillis)
+                points += 1
             }
         }
         handler.postDelayed(runnable, 3000) // Start with an initial interval of 3 seconds
@@ -126,7 +134,7 @@ fun PictureWithButton(modifier: Modifier = Modifier) {
 
     Column (
         modifier = modifier
-            .padding(bottom = 64.dp)
+            .padding(bottom = 24.dp)
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -140,11 +148,12 @@ fun PictureWithButton(modifier: Modifier = Modifier) {
                 .padding(bottom = 8.dp)
         )
         Button(
-            onClick = {/*TODO*/},
+            onClick = { /*TODO*/ },
             modifier = Modifier.clip(CircleShape)
                 .size(150.dp)
         ) {
             Text(stringResource(R.string.cool))
         }
+        Text("Points: $points", fontSize = 24.sp)
     }
 }
