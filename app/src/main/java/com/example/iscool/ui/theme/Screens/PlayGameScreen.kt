@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.iscool.R
 import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.unit.sp
 @Composable
 fun PlayGameScreen(
@@ -94,6 +96,8 @@ fun PictureWithButton(
         12 -> R.drawable.notcool_06
         else -> R.drawable.notcool_07
     }
+    var buttonClicked by remember { mutableStateOf(false) }
+    val updatedResult = rememberUpdatedState(result)
 
     // Function to generate random numbers so that same number never comes twice in a row
     // (i.e. same image is not shown twice in a row)
@@ -113,7 +117,11 @@ fun PictureWithButton(
             var previousNum: Int? = null
 
             override fun run() {
-
+                if ((!buttonClicked && updatedResult.value < 7) || (buttonClicked && updatedResult.value > 6)) {
+                    navController.navigate("EndGameRoute")
+                } else {
+                    buttonClicked = false
+                }
                 result = generateRandomNumber(1..13, previousNum)
                 previousNum = result
 
@@ -148,8 +156,9 @@ fun PictureWithButton(
                 .padding(bottom = 8.dp)
         )
         Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.clip(CircleShape)
+            onClick = { buttonClicked = true },
+            modifier = Modifier
+                .clip(CircleShape)
                 .size(150.dp)
         ) {
             Text(stringResource(R.string.cool))
