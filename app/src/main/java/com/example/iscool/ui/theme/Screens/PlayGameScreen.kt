@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.iscool.R
 import androidx.compose.foundation.layout.Row
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.unit.sp
 @Composable
@@ -118,7 +117,7 @@ fun PictureWithButton(
 
             override fun run() {
                 if ((!buttonClicked && updatedResult.value < 7) || (buttonClicked && updatedResult.value > 6)) {
-                    navController.navigate("EndGameRoute")
+                    navController.navigate("EndGameRoute/$points")
                 } else {
                     buttonClicked = false
                 }
