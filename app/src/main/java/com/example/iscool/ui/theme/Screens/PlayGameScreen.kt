@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.iscool.R
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.unit.sp
 @Composable
@@ -49,14 +50,24 @@ fun PlayGameScreen(
             Button(
                 onClick = { navController.navigate("StartGameRoute") },
                 modifier = Modifier
-                    .size(100.dp)
+                    .weight(1F)
+
             ) {
                 Text(stringResource(R.string.cancelButtonText))
             }
             Button(
+                onClick = { navController.navigate("PlayGameRoute") },
+                modifier = Modifier
+                    .weight(1F)
+
+            ) {
+                Text(stringResource(R.string.restartButtonText))
+            }
+            Button(
                 onClick = { navController.navigate("EndGameRoute") },
                 modifier = Modifier
-                    .size(100.dp)
+                    .weight(1F)
+
             ) {
                 Text(stringResource(R.string.quitGameButtonText))
             }
