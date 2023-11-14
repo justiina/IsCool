@@ -1,5 +1,7 @@
 package com.example.iscool.ui.theme.Screens
 
+import android.widget.TextView
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -11,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.iscool.R
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
 
 @Composable
 fun StartGameScreen(
@@ -19,14 +23,24 @@ fun StartGameScreen(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = modifier
-            .fillMaxSize(), // Täyttää koko ruudun
+        modifier = Modifier
+            .fillMaxSize() // Täyttää koko ruudun
+            .padding(top = 50.dp)
+            .padding(24.dp),
         verticalArrangement = Arrangement.Top, // Asettaa sisällön yläosaan
         horizontalAlignment = Alignment.CenterHorizontally // Asettaa sisällön keskelle vaakasuunnassa
     ) {
+        val image = painterResource(R.drawable.logo)
+        Image(
+            painter = image,
+            contentDescription = null,
+            modifier = Modifier.padding(top = 40.dp)
+        )
         Text(
-            text = "StartGameScreen",
-            modifier = Modifier.padding(top = 20.dp) // Lisää yläreunaan paddingia
+            text = stringResource(R.string.instructionsText),
+            modifier = Modifier
+                .padding(top = 100.dp) // Lisää yläreunaan paddingia
+
         )
         Spacer(modifier = Modifier.weight(2f)) // Käyttää 2/3 tilasta ennen nappia
         Button(
