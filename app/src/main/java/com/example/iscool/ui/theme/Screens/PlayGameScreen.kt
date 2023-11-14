@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.unit.sp
+
 @Composable
 fun PlayGameScreen(
     navController: NavHostController
@@ -63,14 +64,6 @@ fun PlayGameScreen(
             ) {
                 Text(stringResource(R.string.restartButtonText))
             }
-            Button(
-                onClick = { navController.navigate("EndGameRoute") },
-                modifier = Modifier
-                    .weight(1F)
-
-            ) {
-                Text(stringResource(R.string.quitGameButtonText))
-            }
         }
         PictureWithButton(
             navController = navController,
@@ -98,13 +91,21 @@ fun PictureWithButton(
         4 -> R.drawable.iscool_04
         5 -> R.drawable.iscool_05
         6 -> R.drawable.iscool_06
-        7 -> R.drawable.notcool_01
-        8 -> R.drawable.notcool_02
-        9 -> R.drawable.notcool_03
-        10 -> R.drawable.notcool_04
-        11 -> R.drawable.notcool_05
-        12 -> R.drawable.notcool_06
-        else -> R.drawable.notcool_07
+        7 -> R.drawable.iscool_07
+        8 -> R.drawable.iscool_08
+        9 -> R.drawable.iscool_09
+        10 -> R.drawable.iscool_10
+        11 -> R.drawable.iscool_11
+        12 -> R.drawable.iscool_12
+        13 -> R.drawable.iscool_13
+        14 -> R.drawable.notcool_01
+        15 -> R.drawable.notcool_02
+        16 -> R.drawable.notcool_03
+        17 -> R.drawable.notcool_04
+        18 -> R.drawable.notcool_05
+        19 -> R.drawable.notcool_06
+        20 -> R.drawable.notcool_07
+        else -> R.drawable.notcool_10
     }
     var buttonClicked by remember { mutableStateOf(false) }
     val updatedResult = rememberUpdatedState(result)
@@ -127,12 +128,12 @@ fun PictureWithButton(
             var previousNum: Int? = null
 
             override fun run() {
-                if ((!buttonClicked && updatedResult.value < 7) || (buttonClicked && updatedResult.value > 6)) {
+                if ((!buttonClicked && updatedResult.value < 14) || (buttonClicked && updatedResult.value > 13)) {
                     navController.navigate("EndGameRoute/$points")
                 } else {
                     buttonClicked = false
                 }
-                result = generateRandomNumber(1..13, previousNum)
+                result = generateRandomNumber(1..20, previousNum)
                 previousNum = result
 
                 // Reduce the interval gradually by 100 milliseconds
@@ -157,6 +158,8 @@ fun PictureWithButton(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text("Points: $points", fontSize = 24.sp)
+
         Image(
             painter = painterResource(imageResource),
             contentDescription = "1",
@@ -173,6 +176,5 @@ fun PictureWithButton(
         ) {
             Text(stringResource(R.string.cool))
         }
-        Text("Points: $points", fontSize = 24.sp)
     }
 }

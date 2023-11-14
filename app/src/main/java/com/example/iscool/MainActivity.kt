@@ -29,11 +29,12 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun IsCoolApp() {
-    val navController = rememberNavController()
+    val navController = rememberNavController() //NavController is the navigation API
 
+    //NavHost defines the navigation structure of the app
     NavHost(
         navController = navController,
-        startDestination = "startGameRoute"
+        startDestination = "startGameRoute" //startGameScreen is shown when the app starts
     ){
         composable("startGameRoute") {
             StartGameScreen(navController)
