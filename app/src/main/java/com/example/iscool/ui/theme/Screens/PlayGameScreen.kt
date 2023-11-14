@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.unit.sp
-import com.google.firebase.inappmessaging.model.Button
 
 @Composable
 fun PlayGameScreen(
