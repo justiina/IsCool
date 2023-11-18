@@ -24,32 +24,31 @@ fun StartGameScreen(
 ){
     Column(
         modifier = Modifier
-            .fillMaxSize() // Täyttää koko ruudun
-            .padding(top = 50.dp)
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Top, // Asettaa sisällön yläosaan
-        horizontalAlignment = Alignment.CenterHorizontally // Asettaa sisällön keskelle vaakasuunnassa
+            .fillMaxSize() // Fills the entire screen
+            .padding(top = 50.dp) // Adds padding at the top
+            .padding(24.dp), // Adds padding around the edges
+        verticalArrangement = Arrangement.Top, // Aligns content to the top
+        horizontalAlignment = Alignment.CenterHorizontally // Centers content horizontally
     ) {
         val image = painterResource(R.drawable.logo)
         Image(
             painter = image,
             contentDescription = null,
-            modifier = Modifier.padding(top = 40.dp)
+            modifier = Modifier.padding(top = 40.dp) // Adds padding above the image
         )
         Text(
             text = stringResource(R.string.instructionsText),
             modifier = Modifier
-                .padding(top = 100.dp) // Lisää yläreunaan paddingia
-
+                .padding(top = 100.dp) // Adds padding above the text
         )
-        Spacer(modifier = Modifier.weight(2f)) // Käyttää 2/3 tilasta ennen nappia
+        Spacer(modifier = Modifier.weight(2f)) // Takes up 2/3 of the remaining space before the button
         Button(
-            onClick = { navController.navigate("PlayGameRoute") },
+            onClick = { navController.navigate("PlayGameRoute") }, // Navigates to the game screen
             modifier = Modifier
-                .size(100.dp) // Asettaa napin koon
+                .size(100.dp) // Sets the size of the button
         ) {
-            Text(stringResource(R.string.playButtonText))
+            Text(stringResource(R.string.playButtonText)) // Button text
         }
-        Spacer(modifier = Modifier.weight(1f)) // Käyttää 1/3 tilasta napin jälkeen
+        Spacer(modifier = Modifier.weight(1f)) // Takes up 1/3 of the remaining space after the button
     }
 }

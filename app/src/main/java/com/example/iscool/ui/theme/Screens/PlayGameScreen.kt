@@ -78,12 +78,14 @@ fun PictureWithButton(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
+    // State for handling the result and points
     var result by remember {
         mutableStateOf(5)
     }
     var points by remember {
         mutableStateOf(0)
     }
+    // Selecting an image resource based on the current result
     val imageResource = when(result) {
         1 -> R.drawable.iscool_01
         2 -> R.drawable.iscool_02
@@ -107,7 +109,9 @@ fun PictureWithButton(
         20 -> R.drawable.notcool_07
         else -> R.drawable.notcool_10
     }
+    // State for handling button click status
     var buttonClicked by remember { mutableStateOf(false) }
+    // Remembering the latest value of the result
     val updatedResult = rememberUpdatedState(result)
 
     // Function to generate random numbers so that same number never comes twice in a row
@@ -158,8 +162,9 @@ fun PictureWithButton(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Displaying the current points
         Text("Points: $points", fontSize = 24.sp)
-
+        // Displaying the image
         Image(
             painter = painterResource(imageResource),
             contentDescription = "1",
@@ -168,6 +173,7 @@ fun PictureWithButton(
                 .weight(1f)
                 .padding(bottom = 8.dp)
         )
+        // Button for player interaction
         Button(
             onClick = { buttonClicked = true },
             modifier = Modifier

@@ -21,12 +21,13 @@ fun EndGameScreen(
     navController: NavHostController,
     points: Int
 ) {
-    val context = LocalContext.current
+    val context = LocalContext.current // Accessing the current context
     val sharedPreferences = context.getSharedPreferences("GameScores", Context.MODE_PRIVATE)
-    val topScores = getTopScores(sharedPreferences)
-    saveScoreIfTop(sharedPreferences, points)
+    val topScores = getTopScores(sharedPreferences) // Fetching the top scores from shared preferences
+    saveScoreIfTop(sharedPreferences, points) // Saving the current score if it's among the top scores
 
     Column(
+        // Configuring the column layout with modifiers for size and padding
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
@@ -34,6 +35,7 @@ fun EndGameScreen(
         verticalArrangement = Arrangement.Center
     ) {
         AnimatedVisibility(
+            // Animation for displaying the "Game Over" text
             visible = true,
             enter = fadeIn(animationSpec = tween(1000)) + expandVertically(animationSpec = tween(1000)),
             exit = fadeOut()
@@ -45,9 +47,10 @@ fun EndGameScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Provides spacing between elements
 
         AnimatedVisibility(
+            // Animation for displaying the player's score
             visible = true,
             enter = fadeIn(animationSpec = tween(1000)) + expandIn(animationSpec = tween(1000)),
             exit = fadeOut()
@@ -59,10 +62,11 @@ fun EndGameScreen(
             )
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(32.dp)) // Additional spacing
 
-        // Play Again Button
+        // Play Again Button: Navigates back to the game start screen
         Button(
+            // Button configurations
             onClick = { navController.navigate("StartGameRoute") },
             modifier = Modifier
                 .width(200.dp)
@@ -71,10 +75,11 @@ fun EndGameScreen(
             Text("Play Again")
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Spacing before the next button
 
-        // Share Button
+        // Share Button: Allows sharing the score via other apps
         Button(
+            // Share button configurations and intent setup
             onClick = {
                 val shareIntent = Intent().apply {
                     action = Intent.ACTION_SEND
@@ -90,7 +95,7 @@ fun EndGameScreen(
             Text("Share Your Score")
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) // Spacing before the top scores list
 
         // Top Scores List
         AnimatedVisibility(
